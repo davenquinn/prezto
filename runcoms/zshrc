@@ -70,6 +70,7 @@ alias v.cd='cdvirtualenv'
 alias v.lssitepackages='lssitepackages'
 
 alias edit_env='mvim ~/Environment/dotfiles'
+alias du='du -h'
 
 export PYTHONDONTWRITEBYTECODE=True
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
