@@ -79,3 +79,5 @@ export PIP_RESPECT_VIRTUALENV=true
 function killport () {
   kill -9 `lsof -t -i :$1`
 }
+
+precmd() { print "" }
