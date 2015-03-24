@@ -72,6 +72,9 @@ alias v.lssitepackages='lssitepackages'
 alias edit_env='mvim ~/Environment/dotfiles'
 alias du='du -h'
 
+NVIM_HOME='~/Documents/Notes'
+alias nvim='~/.janus/nvim/nvim'
+
 export PYTHONDONTWRITEBYTECODE=True
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
