@@ -10,14 +10,10 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-. $(brew --prefix)/etc/profile.d/z.sh
-# Customize to your needs...
-COREUTILS=$(brew --prefix coreutils)/libexec/gnubin
-
 export DOTFILES="$HOME/Environment/dotfiles"
 export LOCALBIN="$HOME/bin:$DOTFILES/bin"
 
-export PATH="$LOCALBIN:$COREUTILS:$PATH"
+export PATH="$LOCALBIN:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -32,9 +28,6 @@ export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto";
 
-# Link Homebrew casks in `/Applications` rather than `~/Applications`
-export HOMEBREW_CASK_OPTS="--appdir=/Applications";
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -47,32 +40,7 @@ alias such='git'
 alias very='git'
 alias text-changes='git diff --color-words'
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# PostgreSQL
-export PGDATA=$HOME/Library/Databases/PostgreSQL/
-
-# Python Virtualenv
-
-export WORKON_HOME="$HOME/Environment/virtualenvs"
-export PROJECT_HOME="$HOME/Development"
-source /usr/local/bin/virtualenvwrapper.sh
-
-alias v='workon'
-alias v.deactivate='deactivate'
-alias v.mk='mkvirtualenv'
-alias v.rm='rmvirtualenv'
-alias v.switch='workon'
-alias v.add2virtualenv='add2virtualenv'
-alias v.cdsitepackages='cdsitepackages'
-alias v.cd='cdvirtualenv'
-alias v.lssitepackages='lssitepackages'
-
-alias edit_env='mvim ~/Environment/dotfiles'
+alias edit_env='vim ~/Environment/dotfiles'
 alias du='du -h'
 alias nw='/opt/homebrew-cask/Caskroom/nwjs/0.12.1/nwjs-v0.12.1-osx-x64/nwjs.app/Contents/MacOS/nwjs'
 
@@ -80,7 +48,6 @@ NVIM_HOME='~/Documents/Notes'
 alias nvim='~/.janus/nvim/nvim'
 
 export PYTHONDONTWRITEBYTECODE=True
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 
 function killport () {
@@ -88,3 +55,7 @@ function killport () {
 }
 
 precmd() { print "" }
+
+if [ -f ~/.zshrc.local ]; then
+  source ~/.zshrc.local
+fi

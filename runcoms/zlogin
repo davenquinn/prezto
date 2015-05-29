@@ -20,4 +20,5 @@ if (( $+commands[fortune] )); then
   print
 fi
 
-archey --color
+#archey --color
+#screenfetch
