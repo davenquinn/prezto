@@ -10,10 +10,14 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+. $(brew --prefix)/etc/profile.d/z.sh
+# Customize to your needs...
+COREUTILS=$(brew --prefix coreutils)/libexec/gnubin
+
 export DOTFILES="$HOME/Environment/dotfiles"
 export LOCALBIN="$HOME/bin:$DOTFILES/bin"
 
-export PATH="$LOCALBIN:$PATH"
+export PATH="$LOCALBIN:$COREUTILS:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -21,6 +25,9 @@ export PATH="$LOCALBIN:$PATH"
 
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X";
+
+# Link Homebrew casks in `/Applications` rather than `~/Applications`
+export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 
 # Sometimes needed for installing things
 export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
@@ -40,7 +47,6 @@ alias such='git'
 alias very='git'
 alias text-changes='git diff --color-words'
 
-alias edit_env='vim ~/Environment/dotfiles'
 alias du='du -h'
 
 NVIM_HOME='~/Documents/Notes'
@@ -56,11 +62,18 @@ function killport () {
 precmd() { print "" }
 
 if [[ $(uname) == 'Linux' ]]; then
-
+  alias edit_env='vim ~/Environment/dotfiles'
 fi
 
 if [[ $(uname) == 'Darwin' ]]; then
+  # PostgreSQL
+  export PGDATA=$HOME/Library/Databases/PostgreSQL/
 
+  # Python virtualenvs
+  export WORKON_HOME="$HOME/Environment/virtualenvs"
+  export PROJECT_HOME="$HOME/Development"
+  source /usr/local/bin/virtualenvwrapper.sh
+  alias edit_env='mvim ~/Environment/dotfiles'
 fi
 
 if [ -f ~/.zshrc.local ]; then
