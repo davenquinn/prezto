@@ -15,9 +15,9 @@ fi
 COREUTILS=$(brew --prefix coreutils)/libexec/gnubin
 
 export DOTFILES="$HOME/Environment/dotfiles"
-export LOCALBIN="$DOTFILES/bin"
+export LOCALBIN="$HOME/bin:$DOTFILES/bin"
 
-export PATH="$LOCALBIN:/usr/local/bin:$COREUTILS:$PATH"
+export PATH="$LOCALBIN:$COREUTILS:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -25,6 +25,9 @@ export PATH="$LOCALBIN:/usr/local/bin:$COREUTILS:$PATH"
 
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X";
+
+# Sometimes needed for installing things
+export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
 
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto";
@@ -71,6 +74,7 @@ alias v.lssitepackages='lssitepackages'
 
 alias edit_env='mvim ~/Environment/dotfiles'
 alias du='du -h'
+alias nw='/opt/homebrew-cask/Caskroom/nwjs/0.12.1/nwjs-v0.12.1-osx-x64/nwjs.app/Contents/MacOS/nwjs'
 
 NVIM_HOME='~/Documents/Notes'
 alias nvim='~/.janus/nvim/nvim'
