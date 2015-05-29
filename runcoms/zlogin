@@ -20,5 +20,11 @@ if (( $+commands[fortune] )); then
   print
 fi
 
-#archey --color
-#screenfetch
+if [[ $(uname) == 'Linux' ]]; then
+  screenfetch
+fi
+
+if [[ $(uname) == 'Darwin' ]]; then
+  archey --color
+fi
+

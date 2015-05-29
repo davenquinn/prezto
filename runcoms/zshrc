@@ -42,7 +42,6 @@ alias text-changes='git diff --color-words'
 
 alias edit_env='vim ~/Environment/dotfiles'
 alias du='du -h'
-alias nw='/opt/homebrew-cask/Caskroom/nwjs/0.12.1/nwjs-v0.12.1-osx-x64/nwjs.app/Contents/MacOS/nwjs'
 
 NVIM_HOME='~/Documents/Notes'
 alias nvim='~/.janus/nvim/nvim'
@@ -55,6 +54,14 @@ function killport () {
 }
 
 precmd() { print "" }
+
+if [[ $(uname) == 'Linux' ]]; then
+
+fi
+
+if [[ $(uname) == 'Darwin' ]]; then
+
+fi
 
 if [ -f ~/.zshrc.local ]; then
   source ~/.zshrc.local
