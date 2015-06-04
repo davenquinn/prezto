@@ -30,7 +30,7 @@ export MANPAGER="less -X";
 export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 
 # Sometimes needed for installing things
-export PKG_CONFIG_PATH=/opt/X11/lib/pkgconfig
+export PKG_CONFIG_PATH=$(brew --prefix)/lib/pkgconfig
 
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto";
@@ -52,6 +52,7 @@ alias du='du -h'
 NVIM_HOME='~/Documents/Notes'
 alias nvim='~/.janus/nvim/nvim'
 
+export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
 export PYTHONDONTWRITEBYTECODE=True
 export PIP_RESPECT_VIRTUALENV=true
 
@@ -68,6 +69,9 @@ fi
 if [[ $(uname) == 'Darwin' ]]; then
   # PostgreSQL
   export PGDATA=$HOME/Library/Databases/PostgreSQL/
+
+  # GIS
+  export GDAL_DRIVER_PATH="$(brew --prefix)/lib/gdalplugins"
 
   # Python virtualenvs
   export WORKON_HOME="$HOME/Environment/virtualenvs"
