@@ -92,7 +92,6 @@ if [[ $(uname) == 'Darwin' ]]; then
   # Python virtualenvs
   export WORKON_HOME="$HOME/Environment/virtualenvs"
   export PROJECT_HOME="$HOME/Development"
-  source /usr/local/bin/virtualenvwrapper.sh
 
   alias env.edit='mvim ~/Environment/dotfiles'
 
@@ -102,6 +101,23 @@ if [[ $(uname) == 'Darwin' ]]; then
   #export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
   alias ls='ls --color'
 
+fi
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+
+export PYTHON_CONFIGURE_OPTS="--enable-framework CC=clang"
+export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+
+# Add pyenv root to PATH
+# and initialize pyenv
+if [[ -d $PYENV_ROOT ]];then
+    PATH="$PYENV_ROOT/bin:$PATH"
+    # initialize pyenv
+    eval "$(pyenv init -)"
+    # initialize pyenv virtualenv
+    eval "$(pyenv virtualenv-init -)"
+    eval "$(pyenv virtualenvwrapper -)"
 fi
 
 if [ -f ~/.zshrc.local ]; then
