@@ -12,6 +12,8 @@ fi
 
 . $(brew --prefix)/etc/profile.d/z.sh
 # Customize to your needs...
+autoload -U zmv
+
 COREUTILS=$(brew --prefix coreutils)/libexec/gnubin
 
 export DOTFILES="$HOME/Environment/dotfiles"
@@ -30,7 +32,7 @@ export MANPAGER="less -X";
 export HOMEBREW_CASK_OPTS="--appdir=/Applications";
 
 # Sometimes needed for installing things
-export PKG_CONFIG_PATH=$(brew --prefix)/lib/pkgconfig
+export PKG_CONFIG_PATH="$(brew --prefix)/lib/pkgconfig:/usr/lib/pkgconfig:/opt/X11/lib/pkgconfig";
 
 # Always enable colored `grep` output
 export GREP_OPTIONS="--color=auto";
@@ -49,10 +51,6 @@ alias text-changes='git diff --color-words'
 
 alias du='du -h'
 
-NVIM_HOME='~/Documents/Notes'
-alias nvim='~/.janus/nvim/nvim'
-
-export PYTHONPATH="$(brew --prefix)/lib/python2.7/site-packages:$PYTHONPATH"
 export PYTHONDONTWRITEBYTECODE=True
 export PIP_RESPECT_VIRTUALENV=true
 
@@ -60,10 +58,28 @@ function killport () {
   kill -9 `lsof -t -i :$1`
 }
 
+function pyview() {
+  mvim -R `python -c "import os, $1; print os.path.dirname($1.__file__)"`
+}
+
+function diff() {
+  git diff --color=always $1 $2 | less -r
+}
+
 precmd() { print "" }
 
+#function env() {
+  #print "  Command to edit local environment
+  #env
+     #.edit ........ modify environment in MacVim
+     #.reload ..... reload environment definition
+     #.print .. show environment (printenv alias)
+     #"}
+alias env.reload='source ~/.zshrc'
+alias env.print='printenv'
+
 if [[ $(uname) == 'Linux' ]]; then
-  alias edit_env='vim ~/Environment/dotfiles'
+  alias env.edit='vim ~/Environment/dotfiles'
 fi
 
 if [[ $(uname) == 'Darwin' ]]; then
@@ -77,7 +93,15 @@ if [[ $(uname) == 'Darwin' ]]; then
   export WORKON_HOME="$HOME/Environment/virtualenvs"
   export PROJECT_HOME="$HOME/Development"
   source /usr/local/bin/virtualenvwrapper.sh
-  alias edit_env='mvim ~/Environment/dotfiles'
+
+  alias env.edit='mvim ~/Environment/dotfiles'
+
+  alias pad='mvim -c "Pad ls"'
+
+  #export CLICOLOR=1
+  #export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+  alias ls='ls --color'
+
 fi
 
 if [ -f ~/.zshrc.local ]; then
