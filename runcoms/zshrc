@@ -79,6 +79,9 @@ precmd() { print "" }
 alias env.reload='source ~/.zshrc'
 alias env.print='printenv'
 
+# Project management
+alias prm='. ~/Environment/dotfiles/bin/prm/prm.sh'
+
 if [[ $(uname) == 'Linux' ]]; then
   alias env.edit='vim ~/Environment/dotfiles'
 fi
