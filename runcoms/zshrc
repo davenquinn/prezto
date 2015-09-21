@@ -48,6 +48,7 @@ alias wow='git status'
 alias such='git'
 alias very='git'
 alias text-changes='git diff --color-words'
+alias grr='git graph'
 
 alias du='du -h'
 
