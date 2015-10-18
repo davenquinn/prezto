@@ -18,8 +18,9 @@ COREUTILS=$(brew --prefix coreutils)/libexec/gnubin
 
 export DOTFILES="$HOME/Environment/dotfiles"
 export LOCALBIN="$HOME/bin:$DOTFILES/bin"
+export TEX_BIN="/usr/local/texlive/2014/bin/x86_64-darwin"
 
-export PATH="$LOCALBIN:$COREUTILS:$PATH"
+export PATH="$LOCALBIN:$TEX_BIN:$COREUTILS:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -104,6 +105,9 @@ if [[ $(uname) == 'Darwin' ]]; then
   #export CLICOLOR=1
   #export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
   alias ls='ls --color'
+
+  # Set up environment for ENVI and modify the IDL path:
+  export IDL_PATH="<IDL_DEFAULT>:/Applications/exelis/CAT_ENVI/"
 
 fi
 
