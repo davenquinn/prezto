@@ -60,6 +60,9 @@ function killport () {
   kill -9 `lsof -t -i :$1`
 }
 
+# Use vim key bindings
+bindkey -v
+
 function pyview() {
   mvim -R `python -c "import os, $1; print os.path.dirname($1.__file__)"`
 }
